@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello World</title>
+</head>
+<body>
+<h1>Hello World！</h1>
+<form id="form0" action="/hello2" method="post">
+    <p>姓名：</p> <input type="text" name="name"/>
+    <p>称谓：</p> <input type="text" name="title"/>
+    <p>提交的URL：</p>
+    <select id="action" onchange="changeAction()">
+        <option value="/hello2">/hello2</option>
+        <option value="/hello3">/hello3</option>
+    </select>
+    <br/>
+    <input style="margin-top: 20px;" type="submit"/>
+</form>
+</body>
+<script>
+    function changeAction() {
+        let url = document.getElementById("action").value;
+        document.getElementById("form0").action = url;
+    }
+</script>
+</html>
