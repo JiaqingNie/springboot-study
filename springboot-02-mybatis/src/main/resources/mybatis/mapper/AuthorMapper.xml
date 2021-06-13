@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nie.mapper.AuthorMapper">
+
+    <select id="queryAuthorNumber" resultType="int">
+        select count(*) from springbootMybatis.author
+    </select>
+
+    <resultMap id="authorWithBookList" type="Author">
+        <id property="id" column="aid"/>
+        <result property="name" column="aname"/>
+        <result property="dob" column="dob"/>
+        <result property="gender" column="gender"/>
+        <collection property="bookList" javaType="ArrayList" ofType="Book">
+            <result property="id" column="bid"/>
+            <result property="name" column="bname"/>
+            <result property="description" column="description"/>
+            <result property="publicationDate" column="publication_date"/>
+            <result property="authorId" column="author_id"/>
+        </collection>
+    </resultMap>
+    <select id="queryAuthorList" resultMap="authorWithBookList">
+        select a.id aid, a.name aname, a.dob dob, a.gender gender, b.id bid, b.name bname, b.description description, b.publication_date publication_date, b.author_id author_id
+        from springbootMybatis.author a left join springbootMybatis.book b on a.id = b.author_id
+    </select>
+
+    <select id="queryAuthorById" resultMap="authorWithBookList">
+        select a.id aid, a.name aname, a.dob dob, a.gender gender, b.id bid, b.name bname, b.description description, b.publication_date publication_date, b.author_id author_id
+        from springbootMybatis.author a left join springbootMybatis.book b on a.id = b.author_id
+        where a.id = #{id}
+    </select>
+
+    <insert id="createAuthor" parameterType="Author">
+
+        insert into springbootMybatis.author
+        <if test="id==0">
+            (name, dob, gender) values(#{name}, #{dob}, #{gender})
+        </if>
+        <if test="id!=0">
+            (id, name, dob, gender) values(#{id}, #{name}, #{dob}, #{gender})
+        </if>
+
+    </insert>
+
+    <update id="updateAuthor" parameterType="Author">
+        update springbootMybatis.author set name = #{name}, dob = #{dob}, gender = #{gender} where id = #{id}
+    </update>
+
+    <delete id="deleteAuthor" parameterType="int">
+        delete from springbootMybatis.author where id = #{id};
+    </delete>
+</mapper>
