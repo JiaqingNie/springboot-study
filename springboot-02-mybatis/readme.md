@@ -15,6 +15,4 @@
 - 接口接收数据的校验和数据库可能产生的异常处理未实现(比如传递重复的id等)
 - RestController返回值过于原始
 
-
-
-![ER diagram](ER diagram.jpg)
+![](https://raw.githubusercontent.com/JiaqingNie/springboot-study/main/springboot-02-mybatis/ER%20diagram.jpg)
