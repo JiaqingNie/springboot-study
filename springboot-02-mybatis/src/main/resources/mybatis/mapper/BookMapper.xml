@@ -3,5 +3,35 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.nie.mapper.BookMapper">
+    <resultMap id="bookMap" type="Book">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="description" column="description"/>
+        <result property="publicationDate" column="publication_date"/>
+        <result property="authorId" column="author_id"/>
+    </resultMap>
 
+    <select id="queryBookNumber" resultType="int">
+        select count(*) from springbootMybatis.book
+    </select>
+
+    <select id="queryBookList" resultMap="bookMap">
+        select * from springbootMybatis.book
+    </select>
+
+    <select id="queryBookById" resultMap="bookMap">
+        select * from springbootMybatis.book where id = #{id}
+    </select>
+
+    <insert id="createBook" parameterType="Book">
+        insert into springbootMybatis.book (name, description, publication_date, author_id) values (#{name}, #{description}, #{publicationDate}, #{authorId})
+    </insert>
+
+    <update id="updateBook" parameterType="Book">
+        update springbootMybatis.book set name = #{name}, description = #{description}, publication_date = #{publicationDate}, author_id = #{authorId} where id =  #{id}
+    </update>
+
+    <delete id="deleteBook" parameterType="int">
+        delete from springbootMybatis.book where id = #{id}
+    </delete>
 </mapper>
