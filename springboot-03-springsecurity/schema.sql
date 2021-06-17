@@ -26,18 +26,18 @@ CREATE TABLE user_role (
     CONSTRAINT FOREIGN KEY (role_id) REFERENCES role(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS action;
-CREATE TABLE action (
+DROP TABLE IF EXISTS operation;
+CREATE TABLE operation (
     id INT(11) NOT NULL,
-    name VARCHAR(20) UNIQUE  NOT NULL,
+    op_name VARCHAR(20) UNIQUE  NOT NULL,
     PRIMARY KEY (id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
-DROP TABLE IF EXISTS role_action;
-CREATE TABLE role_action (
+DROP TABLE IF EXISTS role_operation;
+CREATE TABLE role_operation (
     role_id INT(11) NOT NULL,
-    action_id INT(11) NOT NULL,
-    PRIMARY KEY (role_id, action_id),
+    operation_id INT(11) NOT NULL,
+    PRIMARY KEY (role_id, operation_id),
     CONSTRAINT FOREIGN KEY (role_id) REFERENCES role(id),
-    CONSTRAINT FOREIGN KEY (action_id) REFERENCES action(id)
+    CONSTRAINT FOREIGN KEY (operation_id) REFERENCES operation(id)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
