@@ -7,6 +7,7 @@ import com.nie.pojo.User;
 import com.nie.service.RoleService;
 import com.nie.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,6 +24,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     @Override
     public User queryUserByUsername(String username) {
@@ -41,6 +45,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public int createUser(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         int res = userMapper.createUser(user);
         int userId = userMapper.queryUserByUsername(user.getUsername()).getId();
         for (String role : user.getRoleSet()){
@@ -53,7 +58,14 @@ public class UserServiceImpl implements UserService {
     @Override
     public int updateUser(User user) {
         int userId = user.getId();
-        Set<String> preRoleSet = userMapper.queryUserById(userId).getRoleSet();
+        User preUser = userMapper.queryUserById(userId);
+
+        String prePassword = preUser.getPassword();
+        if (prePassword != null && !prePassword.equals(user.getPassword())){
+            user.setPassword(passwordEncoder.encode(user.getPassword()));
+        }
+
+        Set<String> preRoleSet = preUser.getRoleSet();
         Set<String> currRoleSet = user.getRoleSet();
 
         updateUserRoles(userId, preRoleSet, currRoleSet);
