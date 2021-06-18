@@ -22,8 +22,8 @@ CREATE TABLE user_role (
     user_id INT(11) NOT NULL,
     role_id INT(11) NOT NULL,
     PRIMARY KEY (user_id, role_id),
-    CONSTRAINT FOREIGN KEY (user_id) REFERENCES user(id),
-    CONSTRAINT FOREIGN KEY (role_id) REFERENCES role(id)
+    FOREIGN KEY (user_id) REFERENCES user(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 DROP TABLE IF EXISTS operation;
@@ -38,6 +38,6 @@ CREATE TABLE role_operation (
     role_id INT(11) NOT NULL,
     operation_id INT(11) NOT NULL,
     PRIMARY KEY (role_id, operation_id),
-    CONSTRAINT FOREIGN KEY (role_id) REFERENCES role(id),
-    CONSTRAINT FOREIGN KEY (operation_id) REFERENCES operation(id)
+    FOREIGN KEY (role_id) REFERENCES role(id) ON DELETE CASCADE ON UPDATE CASCADE,
+    FOREIGN KEY (operation_id) REFERENCES operation(id) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

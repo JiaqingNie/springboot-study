@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.nie.mapper.RoleMapper">
+    <resultMap id="roleMap" type="Role">
+        <id property="id" column="id"/>
+        <result property="roleName" column="role_name"/>
+        <collection property="operationSet" resultMap="stringSet"/>
+    </resultMap>
+
+    <resultMap id="stringSet" type="String">
+        <result column="op_name"/>
+    </resultMap>
+
+    <select id="queryRoleByName" resultMap="roleMap">
+        select *
+        from springbootSpringSecurity.role left join springbootSpringSecurity.role_operation on role.id = role_operation.role_id
+                                           left join springbootSpringSecurity.operation on role_operation.operation_id = operation.id
+        where role_name = #{roleName}
+    </select>
+
+    <select id="queryRoleList" resultMap="roleMap">
+        select *
+        from springbootSpringSecurity.role left join springbootSpringSecurity.role_operation on role.id = role_operation.role_id
+                                           left join springbootSpringSecurity.operation on role_operation.operation_id = operation.id
+    </select>
+
+    <select id="queryRoleById" resultMap="roleMap">
+        select *
+        from springbootSpringSecurity.role left join springbootSpringSecurity.role_operation on role.id = role_operation.role_id
+                                           left join springbootSpringSecurity.operation on role_operation.operation_id = operation.id
+        where role.id = #{id}
+    </select>
+
+    <insert id="createRole" parameterType="Role">
+        insert into springbootSpringSecurity.role (role_name) values (#{roleName})
+    </insert>
+
+    <update id="updateRole" parameterType="Role">
+        update springbootSpringSecurity.role set role_name = #{roleName} where id = #{id}
+    </update>
+
+    <delete id="deleteRole" parameterType="int">
+        delete from springbootSpringSecurity.role where id = #{id}
+    </delete>
+
+
+</mapper>

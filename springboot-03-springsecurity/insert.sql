@@ -18,7 +18,10 @@ INSERT INTO operation (id, op_name) VALUES (8, 'USER_DELETE');
 
 
 INSERT INTO user_role (user_id, role_id) VALUES (1, 1);
+INSERT INTO user_role (user_id, role_id) VALUES (1, 2);
+INSERT INTO user_role (user_id, role_id) VALUES (1, 3);
 INSERT INTO user_role (user_id, role_id) VALUES (2, 2);
+INSERT INTO user_role (user_id, role_id) VALUES (2, 3);
 INSERT INTO user_role (user_id, role_id) VALUES (3, 3);
 
 INSERT INTO role_operation (role_id, operation_id) VALUES (1, 1);
