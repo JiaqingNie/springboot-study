@@ -24,6 +24,7 @@
         select *
         from springbootSpringSecurity.role left join springbootSpringSecurity.role_operation on role.id = role_operation.role_id
                                            left join springbootSpringSecurity.operation on role_operation.operation_id = operation.id
+        order by role.id
     </select>
 
     <select id="queryRoleById" resultMap="roleMap">

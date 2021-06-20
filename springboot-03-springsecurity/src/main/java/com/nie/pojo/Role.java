@@ -13,4 +13,8 @@ public class Role {
     private int id;
     private String roleName;
     private Set<String> operationSet;
+
+    public boolean hasOperation(String op) {
+        return operationSet != null && operationSet.contains(op);
+    }
 }

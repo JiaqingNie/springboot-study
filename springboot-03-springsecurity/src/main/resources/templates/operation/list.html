@@ -30,22 +30,6 @@
             <div class="layui-row layui-col-space15">
                 <div class="layui-col-md12">
                     <div class="layui-card">
-                        <div class="layui-card-body ">
-                            <form class="layui-form layui-col-space5">
-                                <div class="layui-inline layui-show-xs-block">
-                                    <input class="layui-input"  autocomplete="off" placeholder="开始日" name="start" id="start">
-                                </div>
-                                <div class="layui-inline layui-show-xs-block">
-                                    <input class="layui-input"  autocomplete="off" placeholder="截止日" name="end" id="end">
-                                </div>
-                                <div class="layui-inline layui-show-xs-block">
-                                    <input type="text" name="username"  placeholder="请输入用户名" autocomplete="off" class="layui-input">
-                                </div>
-                                <div class="layui-inline layui-show-xs-block">
-                                    <button class="layui-btn"  lay-submit="" lay-filter="sreach"><i class="layui-icon">&#xe615;</i></button>
-                                </div>
-                            </form>
-                        </div>
                         <div class="layui-card-header">
                             <button class="layui-btn" onclick="xadmin.open('添加权限','./operations/new',600,400)"><i class="layui-icon"></i>添加</button>
                         </div>
@@ -63,10 +47,10 @@
                                         <td th:text="${op.getId()}"></td>
                                         <td th:text="${op.getOpName()}"></td>
                                         <td class="td-manage">
-                                          <a title="编辑"  th:onclick="showEditPage([[${user.getId()}]])" href="javascript:;">
+                                          <a title="编辑"  th:onclick="showEditPage([[${op.getId()}]])" href="javascript:;">
                                             <i class="layui-icon">&#xe642;</i>
                                           </a>
-                                          <a title="删除" th:onclick="member_del(this,[[${user.getId()}]])" href="javascript:;">
+                                          <a title="删除" th:onclick="member_del(this,[[${op.getId()}]])" href="javascript:;">
                                             <i class="layui-icon">&#xe640;</i>
                                           </a>
                                         </td>
@@ -114,7 +98,7 @@
       function member_del(obj,id){
           layer.confirm('确认要删除吗？',function(index){
               $.ajax({
-                  url: "/users/"+id,
+                  url: "/operations/"+id,
                   type: "DELETE",
                   success: function (res) {
                       $(obj).parents("tr").remove();
@@ -130,7 +114,7 @@
 
 
       function getEditPath(id) {
-          return "/users/"+id+"/edit"
+          return "/operations/"+id+"/edit"
       }
 
       function showEditPage(id) {

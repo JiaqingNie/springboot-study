@@ -21,7 +21,7 @@ public interface OperationMapper {
     @ResultMap(value = {"operationMap"})
     Operation queryOpById(int id);
 
-    @Select("select * from operation")
+    @Select("select * from operation order by id")
     @ResultMap(value = {"operationMap"})
     List<Operation> queryOpList();
 

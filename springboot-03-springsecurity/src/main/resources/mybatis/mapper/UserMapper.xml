@@ -32,6 +32,7 @@
         select *
         from springbootSpringSecurity.user left join springbootSpringSecurity.user_role on user.id = user_role.user_id
                                            left join springbootSpringSecurity.role on user_role.role_id = role.id
+        order by user.id
     </select>
 
     <insert id="createUser" parameterType="User">

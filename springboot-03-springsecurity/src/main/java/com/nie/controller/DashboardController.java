@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 @Controller
 public class DashboardController {
     @PreAuthorize("hasAnyRole('ROLE_SUPER_ADMIN', 'ROLE_ADMIN', 'ROLE_USER')")
-    @GetMapping({"/", "dashboard", "dashboard.html"})
+    @GetMapping({"/", "/dashboard", "/dashboard.html"})
     public String showDashboard(){
         return "dashboard";
     }

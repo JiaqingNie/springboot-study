@@ -21,26 +21,17 @@
 <div class="layui-fluid">
     <div class="layui-row">
         <form id="form1" class="layui-form">
-            <input type="hidden" name="id" th:value="${user.getId()}">
-            <input type="hidden" name="password" th:value="${user.getPassword()}">
+            <input type="hidden" name="id" th:value="${operation.getId()}">
             <div class="layui-form-item">
-                <label for="username" class="layui-form-label">
-                    <span class="x-red">*</span>用户名</label>
+                <label for="operation-name" class="layui-form-label">
+                    <span class="x-red">*</span>权限名</label>
                 <div class="layui-input-inline">
-                    <input th:value="${user.getUsername()}" name="username" type="text" id="username" required="" autocomplete="off" class="layui-input">
+                    <input th:value="${operation.getOpName()}" name="opName" type="text" id="operation-name" required="" autocomplete="off" class="layui-input">
                 </div>
             </div>
             <div class="layui-form-item">
-                <label for="role" class="layui-form-label">
-                    <span class="x-red">*</span>角色</label>
-                <div class="layui-input-inline" id="role">
-                    <div th:each="role:${roles}">
-                        <input type="checkbox" name="roleSet[]" required="" th:checked="${user.hasRole(role)}" th:value="${role}" autocomplete="off" class="layui-input"/>
-                        <span th:text="${role}"></span>
-                    </div>
-                </div>
                 <div class="layui-form-item">
-                    <label for="role" class="layui-form-label"></label>
+                    <label for="operation-name" class="layui-form-label"></label>
                     <button class="layui-btn" lay-filter="add" lay-submit="">提交</button>
                 </div>
             </div>
@@ -57,12 +48,8 @@
         form.on('submit(add)',
             function(data) {
                 console.log(data)
-                
-                let roleSet = []
-                //data.field.roleSet.forEach(e => {roleSet.push(e)})
-                data.field.roleSet = roleSet
                 $.ajax({
-                    url: '/users/'+data.field.id,
+                    url: '/operations/'+data.field.id,
                     type: 'PATCH',
                     contentType: 'application/json;charset=utf-8',
                     data: JSON.stringify(data.field),
@@ -87,14 +74,6 @@
             });
 
     });
-</script>
-<script>
-    var _hmt = _hmt || []; (function() {
-        var hm = document.createElement("script");
-        hm.src = "https://hm.baidu.com/hm.js?b393d153aeb26b46e9431fabaf0f6190";
-        var s = document.getElementsByTagName("script")[0];
-        s.parentNode.insertBefore(hm, s);
-    })();
 </script>
 </body>
 

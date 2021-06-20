@@ -12,7 +12,7 @@ public interface RoleOperationMapper {
     @Insert("insert into role_operation (role_id, operation_id) values (#{roleId}, #{opId})")
     int addOptoRoleById(int roleId, int opId);
 
-    @Delete("delete from role_operation where role_id = #{roleId} and op_id = #{opId}")
+    @Delete("delete from role_operation where role_id = #{roleId} and operation_id = #{opId}")
     int removeOpFromRoleById(int roleId, int opId);
 
 }
