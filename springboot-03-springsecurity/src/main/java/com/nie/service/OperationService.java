@@ -12,6 +12,8 @@ public interface OperationService {
 
     List<Operation> queryOpList();
 
+    List<String> queryOpStringList();
+
     int createOp(Operation op);
 
     int updateOp(Operation op);

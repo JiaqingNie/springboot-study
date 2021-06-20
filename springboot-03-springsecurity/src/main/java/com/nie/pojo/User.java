@@ -14,4 +14,8 @@ public class User {
     private String username;
     private String password;
     private Set<String> roleSet;
+
+    public boolean hasRole(String role) {
+        return roleSet != null && roleSet.contains(role);
+    }
 }

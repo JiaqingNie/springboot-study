@@ -6,6 +6,7 @@ import com.nie.service.OperationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service("OperationService")
@@ -27,6 +28,16 @@ public class OperationServiceImpl implements OperationService {
     @Override
     public List<Operation> queryOpList() {
         return operationMapper.queryOpList();
+    }
+
+    @Override
+    public List<String> queryOpStringList() {
+        List<Operation> operationList = queryOpList();
+        List<String> opStringList = new ArrayList<>();
+        for (Operation op : operationList) {
+            opStringList.add(op.getOpName());
+        }
+        return opStringList;
     }
 
     @Override

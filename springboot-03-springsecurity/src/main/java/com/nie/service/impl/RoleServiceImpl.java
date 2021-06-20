@@ -9,6 +9,7 @@ import com.nie.service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -37,6 +38,16 @@ public class RoleServiceImpl implements RoleService {
     @Override
     public List<Role> queryRoleList() {
         return roleMapper.queryRoleList();
+    }
+
+    @Override
+    public List<String> queryRoleStringList() {
+        List<Role> roleList = queryRoleList();
+        List<String> roleStringList = new ArrayList<>();
+        for (Role role : roleList) {
+            roleStringList.add(role.getRoleName());
+        }
+        return roleStringList;
     }
 
     @Override

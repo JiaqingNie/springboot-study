@@ -12,6 +12,8 @@ public interface RoleService {
 
     List<Role> queryRoleList();
 
+    List<String> queryRoleStringList();
+
     int createRole(Role role);
 
     int updateRole(Role role);

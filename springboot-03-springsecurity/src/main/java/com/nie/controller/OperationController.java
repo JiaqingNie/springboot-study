@@ -4,17 +4,19 @@ import com.nie.pojo.Operation;
 import com.nie.service.OperationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@RestController
+@Controller
 public class OperationController {
 
     @Autowired
     private OperationService operationService;
 
     @GetMapping("/operations/{opName}")
+    @ResponseBody
     @PreAuthorize("hasAuthority('OP_OPERATION_READ')")
     public Operation getOpByName(@PathVariable("opName") String opName){
         return operationService.queryOpByName(opName);
